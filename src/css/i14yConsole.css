@@ -1,0 +1,18 @@
+@import url("https://unpkg.com/swagger-ui-dist@4/swagger-ui.css");
+
+.swagger-ui .topbar .download-url-wrapper input[type="text"] {
+    border: 2px solid #77889a;
+}
+.swagger-ui .topbar .download-url-wrapper .download-url-button {
+    background: #77889a;
+  }
+.swagger-ui img {
+    display: none;
+  }
+.swagger-ui .topbar {
+    background-color: #ededed;
+    border-bottom: 2px solid #c1c1c1;
+  }
+.swagger-ui .topbar .download-url-wrapper .select-label {
+    color: #3b4151;
+  }
