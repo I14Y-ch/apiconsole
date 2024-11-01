@@ -1,1 +1,0 @@
-window.location.href='Public/v1/index.html';

@@ -2,15 +2,24 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="../../src/js/i14yConsole.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../src/css/i14yConsole.css" />
-    <title>i14y Console partner</title>
+    <script src="https://unpkg.com/swagger-ui-dist@4/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@4/swagger-ui-standalone-preset.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../src/css/index.css" />
+    <title>I14Y Console <P></P>artner</title>
   </head>
   <body>
     <div id="swagger-ui"></div>
     <script defer>
       window.onload = function () {
-        loadSwagger()
+          const ui = SwaggerUIBundle({
+          configUrl : "configUrl.json",
+          dom_id: "#swagger-ui",
+          deepLinking: true,
+          presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+          plugins: [SwaggerUIBundle.plugins.DownloadUrl],
+          layout: "StandaloneLayout",
+    });
+    window.ui = ui;
       };
     </script>
   </body>
