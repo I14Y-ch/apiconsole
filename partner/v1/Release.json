@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "I14Y Partner API (PRD)",
+        "title": "I14Y Partner API",
         "description": "Deployment info: Release-0.4.0+19-2, Assembly: 0.4.0.6609",
         "version": "v1"
     },
