@@ -1,0 +1,186 @@
+:root {
+    --primary-color: #e60000;
+    --text-color: #15141A;
+    --secondary-text: #5B5B66;
+    --background-light: #F0F0F4;
+    --header-height: 64px;
+}
+
+*, ::before, ::after {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    line-height: 1.15;
+}
+
+body {
+    margin: 0;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+header {
+    background: white;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.header-wrapper {
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 5px solid #dc0018;
+    padding: 0 6px 2px 2px;
+}
+
+.layout-brand {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    width: 215px;
+    padding: 20px 15px;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+.header-title {
+    font-family: Roboto, sans-serif;
+    font-size: 26.4px;
+    color: rgb(117, 117, 117);
+    margin: 0;
+    padding-left: 20px;
+    border-left: 1px solid lightgrey;
+    font-weight: 400;
+}
+
+main {
+    margin-top: var(--header-height);
+    padding-top: 32px;
+    min-height: calc(100vh - var(--header-height));
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1 {
+    font-family: Roboto, sans-serif;
+    font-size: 2.5rem;
+    line-height: 34px;
+    font-weight: 400;
+    margin: 2.8rem 0 1.68rem 0;
+}
+
+h2 {
+    font-family: Roboto, sans-serif;
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.intro {
+    font-size: 1.25em;
+    margin-bottom: 3rem;
+}
+
+.api-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.api-card {
+    background: white;
+    padding: 24px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.button_swagger {
+    display: inline-block;
+    background: #003eaa;
+    color: white;
+    padding: 6px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.button_handbook {
+    display: inline-block;
+    background: #46a35e;
+    color: white;
+    padding: 6px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+a {
+    color: #14516f;
+}
+
+footer {
+    background: var(--background-light);
+    padding: 2rem 0;
+    margin-top: 4rem;
+    width: 100%;
+    border-top: 1px solid #d5d5d5;
+}
+
+.footer-content {
+    width: 100%;
+    padding: 0 24px;
+}
+
+.footer-content p {
+    margin: 0;
+    color: var(--secondary-text);
+    padding-left: 15px;
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .api-card {
+        padding: 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    html {
+        font-size: 14.5px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    html {
+        font-size: 15px;
+    }
+}

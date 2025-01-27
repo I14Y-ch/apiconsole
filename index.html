@@ -1,17 +1,55 @@
+<!DOCTYPE html>
 <html lang="de">
 <head> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="../../src/css/i14yConsole.css" />
-    <title>I14Y Console</title>
+    <link rel="stylesheet" type="text/css" href="src/css/i14yConsole.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>I14Y API Consoles</title>
 </head>
 <body>
-    <h1>Provide public and partner API consoles hosted on github</h1>
-        <div>
-            <a href = "./public/v1/index.html">I14Y Public API</a>
+    <header>
+        <div class="header-wrapper">
+            <div class="layout-brand">
+                <div class="logo">
+                    <a href="https://i14y.admin.ch">
+                        <img src="assets/logo.svg" alt="Logo Eidgenossenschaft">
+                    </a>
+                </div>
+                <h1 class="header-title">I14Y API Consoles</h1>
+            </div>
         </div>
-        <div>
-            <a href = 'partner/v1/index.html'>I14Y Partner API</a>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <h1>Explore the I14Y APIs</h1>
+            <div class="intro">
+                <p>The metadata from the <a href="https://i14y.admin.ch">I14Y interoperability platform</a> can be obtained and maintained via the electronic interface (API). I14Y provides two APIs for this purpose.</p>
+            </div>
+            
+            <div class="api-links">
+                <div class="api-card">
+                    <h2>Public API</h2>
+                    <p>Openly published descriptions and data concepts can be accessed via the Public API. No authentication is required. The Public API is intended for testing and occasional use. Please see the Fair Use Policy.</p>
+                    <a href="./public/v1/index.html" class="button_swagger">Swagger</a>
+                    <a href="https://i14y-ch.github.io/handbook/de/metadaten_abrufen/api/" class="button_handbook">Handbook</a>
+                </div>
+                
+                <div class="api-card">
+                    <h2>Partner API</h2>
+                    <p>I14Y partner organisations can use the Partner API to access the organisation's internal metadata and data concepts. They can also automatically maintain their catalogues. An access token is required.</p>
+                    <a href="partner/v1/index.html" class="button_swagger">Swagger</a>
+                    <a href="https://i14y-ch.github.io/handbook/de/publikation/katalog/api/" class="button_handbook">Handbook</a>
+                </div>
+            </div>
         </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Federal Statistical Office</p>
+        </div>
+    </footer>
 </body>
 </html>
