@@ -7,12 +7,12 @@
   },
   "servers": [
     {
-      "url": "https://api.i14y.admin.ch/api/partner/v1/",
+      "url": "https://api.i14y.admin.ch/api/public/v1/",
       "variables": {},
       "description": "PROD"
     },
     {
-      "url": "https://api-a.i14y.admin.ch/api/partner/v1/",
+      "url": "https://api-a.i14y.admin.ch/api/public/v1/",
       "variables": {},
       "description": "ABN"
     }
