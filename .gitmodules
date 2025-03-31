@@ -1,3 +1,0 @@
-[submodule "apiconsole"]
-	path = apiconsole
-	url = https://github.com/swagger-api/swagger-ui/tree/master/dist/
