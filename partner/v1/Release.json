@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "I14Y Partner API",
-    "description": "Deployment info: Release-0.5.22-main.4+5-1, Assembly: 0.5.22.0",
+    "description": "Deployment info: Release-0.5.22-main.6+7-1, Assembly: 0.5.22.0",
     "version": "v1"
   },
   "servers": [
@@ -315,17 +315,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/IopConceptInputModeDataWrapper"
+                "$ref": "#/components/schemas/IopConceptInputModelDataWrapper"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/IopConceptInputModeDataWrapper"
+                "$ref": "#/components/schemas/IopConceptInputModelDataWrapper"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/IopConceptInputModeDataWrapper"
+                "$ref": "#/components/schemas/IopConceptInputModelDataWrapper"
               }
             }
           }
@@ -3835,6 +3835,355 @@
         }
       }
     },
+    "/datasets/{datasetId}/structures/exports/{format}": {
+      "get": {
+        "tags": [
+          "Datasets"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/LinkedDataFormat"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/structures/imports": {
+      "post": {
+        "tags": [
+          "Datasets"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
     "/datasets/{datasetId}/publication-level": {
       "put": {
         "tags": [
@@ -4656,8 +5005,26 @@
   "components": {
     "schemas": {
       "AgentModel": {
+        "required": [
+          "identifier",
+          "name"
+        ],
         "type": "object",
         "properties": {
+          "classification": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactPoint": {
+            "$ref": "#/components/schemas/VCardModel"
+          },
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "homePage": {
+            "type": "string",
+            "nullable": true
+          },
           "id": {
             "type": "string",
             "format": "uuid"
@@ -4668,6 +5035,31 @@
           },
           "name": {
             "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "spatial": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "spatialCH": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "subAgents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdModel"
+            },
+            "nullable": true
+          },
+          "uid": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5927,6 +6319,9 @@
         "additionalProperties": false
       },
       "VocabularyEntryModel": {
+        "required": [
+          "code"
+        ],
         "type": "object",
         "properties": {
           "code": {
@@ -5942,6 +6337,112 @@
           }
         },
         "additionalProperties": false
+      },
+      "DcatDatasetInputModelDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DcatDatasetInputModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DcatDatasetModelDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DcatDatasetModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IopConceptInputModelDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/IopConceptInputModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IopConceptModelDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/IopConceptModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConceptInputBaseDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CodeListConceptInput"
+              },
+              {
+                "$ref": "#/components/schemas/DateConceptInput"
+              },
+              {
+                "$ref": "#/components/schemas/NumericConceptInput"
+              },
+              {
+                "$ref": "#/components/schemas/StringConceptInput"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicServiceExportCollectionDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicServiceExport"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DcatDatasetModelCollectionDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DcatDatasetModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IopConceptModelCollectionDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IopConceptModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LinkedDataFormat": {
+        "enum": [
+          "Ttl",
+          "Rdf",
+          "JsonLd"
+        ],
+        "type": "string"
       },
       "CodeListConceptInput": {
         "allOf": [
@@ -6122,128 +6623,6 @@
             "additionalProperties": false
           }
         ]
-      },
-      "DcatDatasetInputModelDataWrapper": {
-        "required": [
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/DcatDatasetInputModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DcatDatasetModelDataWrapper": {
-        "required": [
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/DcatDatasetModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "IopConceptInputModeDataWrapper": {
-        "required": [
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/IopConceptInputModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "IopConceptModelDataWrapper": {
-        "required": [
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/IopConceptModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ConceptInputBaseDataWrapper": {
-        "required": [
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "data": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/CodeListConceptInput"
-              },
-              {
-                "$ref": "#/components/schemas/DateConceptInput"
-              },
-              {
-                "$ref": "#/components/schemas/NumericConceptInput"
-              },
-              {
-                "$ref": "#/components/schemas/StringConceptInput"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PublicServiceExportCollectionDataWrapper": {
-        "required": [
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PublicServiceExport"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DcatDatasetModelCollectionDataWrapper": {
-        "required": [
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DcatDatasetModel"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "IopConceptModelCollectionDataWrapper": {
-        "required": [
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IopConceptModel"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
       },
       "Channel": {
         "type": "object",

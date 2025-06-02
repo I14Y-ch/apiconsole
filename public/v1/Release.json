@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "I14Y Public API",
-    "description": "Deployment info: Release-0.5.22-main.4+5-1, Assembly: 0.5.22.0",
+    "description": "Deployment info: Release-0.5.22-main.6+7-1, Assembly: 0.5.22.0",
     "version": "v1"
   },
   "servers": [
@@ -1288,6 +1288,228 @@
         }
       }
     },
+    "/datasets/{datasetId}/structures/exports/{format}": {
+      "get": {
+        "x-auth-type": "None",
+        "tags": [
+          "Datasets"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/LinkedDataFormat"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/publicservices/exports/json": {
       "get": {
         "x-auth-type": "None",
@@ -1323,8 +1545,26 @@
   "components": {
     "schemas": {
       "AgentModel": {
+        "required": [
+          "identifier",
+          "name"
+        ],
         "type": "object",
         "properties": {
+          "classification": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactPoint": {
+            "$ref": "#/components/schemas/VCardModel"
+          },
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "homePage": {
+            "type": "string",
+            "nullable": true
+          },
           "id": {
             "type": "string",
             "format": "uuid"
@@ -1335,6 +1575,31 @@
           },
           "name": {
             "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "spatial": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "spatialCH": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "subAgents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdModel"
+            },
+            "nullable": true
+          },
+          "uid": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2075,6 +2340,9 @@
         "additionalProperties": false
       },
       "VocabularyEntryModel": {
+        "required": [
+          "code"
+        ],
         "type": "object",
         "properties": {
           "code": {
@@ -2092,9 +2360,6 @@
         "additionalProperties": false
       },
       "DcatDatasetModelDataWrapper": {
-        "required": [
-          "data"
-        ],
         "type": "object",
         "properties": {
           "data": {
@@ -2104,9 +2369,6 @@
         "additionalProperties": false
       },
       "IopConceptModelDataWrapper": {
-        "required": [
-          "data"
-        ],
         "type": "object",
         "properties": {
           "data": {
@@ -2116,9 +2378,6 @@
         "additionalProperties": false
       },
       "PublicServiceExportCollectionDataWrapper": {
-        "required": [
-          "data"
-        ],
         "type": "object",
         "properties": {
           "data": {
@@ -2132,9 +2391,6 @@
         "additionalProperties": false
       },
       "DcatDatasetModelCollectionDataWrapper": {
-        "required": [
-          "data"
-        ],
         "type": "object",
         "properties": {
           "data": {
@@ -2148,9 +2404,6 @@
         "additionalProperties": false
       },
       "IopConceptModelCollectionDataWrapper": {
-        "required": [
-          "data"
-        ],
         "type": "object",
         "properties": {
           "data": {
@@ -2162,6 +2415,14 @@
           }
         },
         "additionalProperties": false
+      },
+      "LinkedDataFormat": {
+        "enum": [
+          "Ttl",
+          "Rdf",
+          "JsonLd"
+        ],
+        "type": "string"
       },
       "Channel": {
         "type": "object",

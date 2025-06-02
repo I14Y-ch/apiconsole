@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "I14Y Partner API",
-    "description": "Deployment info: Release-0.5.12+2-1, Assembly: 0.5.12.1099",
+    "description": "Deployment info: Release-0.5.22-main.4+5-1, Assembly: 0.5.22.0",
     "version": "v1"
   },
   "servers": [
@@ -276,25 +276,556 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConceptApiViewDataWrapper"
+                  "$ref": "#/components/schemas/IopConceptModelDataWrapper"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConceptApiViewDataWrapper"
+                  "$ref": "#/components/schemas/IopConceptModelDataWrapper"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConceptApiViewDataWrapper"
+                  "$ref": "#/components/schemas/IopConceptModelDataWrapper"
                 }
               }
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Concepts"
+        ],
+        "summary": "Updates an existing concept with the specified id.",
+        "parameters": [
+          {
+            "name": "conceptId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IopConceptInputModeDataWrapper"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IopConceptInputModeDataWrapper"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IopConceptInputModeDataWrapper"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Concepts"
+        ],
+        "summary": "Deletes an existing concept with the specified id.",
+        "parameters": [
+          {
+            "name": "conceptId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
       }
     },
     "/concepts": {
+      "get": {
+        "tags": [
+          "Concepts"
+        ],
+        "summary": "Gets the concepts matching the given filters.",
+        "parameters": [
+          {
+            "name": "conceptIdentifier",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "publisherIdentifier",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "publicationLevel",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "$ref": "#/components/schemas/PublicationLevel"
+            }
+          },
+          {
+            "name": "registrationStatus",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "$ref": "#/components/schemas/RegistrationStatus"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Max number of results per page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IopConceptModelCollectionDataWrapper"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IopConceptModelCollectionDataWrapper"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IopConceptModelCollectionDataWrapper"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Concepts"
@@ -309,7 +840,7 @@
               },
               "examples": {
                 "CodeList concept example": {
-                  "value": {"data":{"conceptType":"CodeList","codeListEntryValueType":"String","codeListEntryValueMaxLength":0,"conformsTo":[{"label":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"uri":"string"}],"description":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"identifier":"Concept_identifier","keywords":[{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"}],"name":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"publisher":{"identifier":"test-organization"},"responsibleDeputy":{"email":"name.123@domain.com"},"responsiblePerson":{"email":"name.123@domain.com"},"themes":[{"code":"101-AAA"}],"validFrom":"2024-12-25T00:00:00+00:00","validTo":"9999-12-31T23:59:59.9999999+00:00","version":"1.0.0"}}
+                  "value": {"data":{"conceptType":"CodeList","codeListEntryDefaultSortProperty":"Code","codeListEntryValueType":"String","codeListEntryValueMaxLength":0,"conformsTo":[{"label":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"uri":"string"}],"description":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"identifier":"Concept_identifier","keywords":[{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"}],"name":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"publisher":{"identifier":"test-organization"},"responsibleDeputy":{"email":"name.123@domain.com"},"responsiblePerson":{"email":"name.123@domain.com"},"themes":[{"code":"101-AAA"}],"validFrom":"2024-12-25T00:00:00+00:00","validTo":"9999-12-31T23:59:59.9999999+00:00","version":"1.0.0"}}
                 },
                 "Date concept example": {
                   "value": {"data":{"conceptType":"Date","pattern":"yyyy-mm-dd","conformsTo":[{"label":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"uri":"string"}],"description":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"identifier":"Concept_identifier","keywords":[{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"}],"name":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"publisher":{"identifier":"test-organization"},"responsibleDeputy":{"email":"name.123@domain.com"},"responsiblePerson":{"email":"name.123@domain.com"},"themes":[{"code":"101-AAA"}],"validFrom":"2024-12-25T00:00:00+00:00","validTo":"9999-12-31T23:59:59.9999999+00:00","version":"1.0.0"}}
@@ -328,7 +859,7 @@
               },
               "examples": {
                 "CodeList concept example": {
-                  "value": {"data":{"conceptType":"CodeList","codeListEntryValueType":"String","codeListEntryValueMaxLength":0,"conformsTo":[{"label":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"uri":"string"}],"description":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"identifier":"Concept_identifier","keywords":[{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"}],"name":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"publisher":{"identifier":"test-organization"},"responsibleDeputy":{"email":"name.123@domain.com"},"responsiblePerson":{"email":"name.123@domain.com"},"themes":[{"code":"101-AAA"}],"validFrom":"2024-12-25T00:00:00+00:00","validTo":"9999-12-31T23:59:59.9999999+00:00","version":"1.0.0"}}
+                  "value": {"data":{"conceptType":"CodeList","codeListEntryDefaultSortProperty":"Code","codeListEntryValueType":"String","codeListEntryValueMaxLength":0,"conformsTo":[{"label":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"uri":"string"}],"description":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"identifier":"Concept_identifier","keywords":[{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"}],"name":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"publisher":{"identifier":"test-organization"},"responsibleDeputy":{"email":"name.123@domain.com"},"responsiblePerson":{"email":"name.123@domain.com"},"themes":[{"code":"101-AAA"}],"validFrom":"2024-12-25T00:00:00+00:00","validTo":"9999-12-31T23:59:59.9999999+00:00","version":"1.0.0"}}
                 },
                 "Date concept example": {
                   "value": {"data":{"conceptType":"Date","pattern":"yyyy-mm-dd","conformsTo":[{"label":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"uri":"string"}],"description":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"identifier":"Concept_identifier","keywords":[{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"}],"name":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"publisher":{"identifier":"test-organization"},"responsibleDeputy":{"email":"name.123@domain.com"},"responsiblePerson":{"email":"name.123@domain.com"},"themes":[{"code":"101-AAA"}],"validFrom":"2024-12-25T00:00:00+00:00","validTo":"9999-12-31T23:59:59.9999999+00:00","version":"1.0.0"}}
@@ -347,7 +878,7 @@
               },
               "examples": {
                 "CodeList concept example": {
-                  "value": {"data":{"conceptType":"CodeList","codeListEntryValueType":"String","codeListEntryValueMaxLength":0,"conformsTo":[{"label":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"uri":"string"}],"description":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"identifier":"Concept_identifier","keywords":[{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"}],"name":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"publisher":{"identifier":"test-organization"},"responsibleDeputy":{"email":"name.123@domain.com"},"responsiblePerson":{"email":"name.123@domain.com"},"themes":[{"code":"101-AAA"}],"validFrom":"2024-12-25T00:00:00+00:00","validTo":"9999-12-31T23:59:59.9999999+00:00","version":"1.0.0"}}
+                  "value": {"data":{"conceptType":"CodeList","codeListEntryDefaultSortProperty":"Code","codeListEntryValueType":"String","codeListEntryValueMaxLength":0,"conformsTo":[{"label":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"uri":"string"}],"description":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"identifier":"Concept_identifier","keywords":[{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"}],"name":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"publisher":{"identifier":"test-organization"},"responsibleDeputy":{"email":"name.123@domain.com"},"responsiblePerson":{"email":"name.123@domain.com"},"themes":[{"code":"101-AAA"}],"validFrom":"2024-12-25T00:00:00+00:00","validTo":"9999-12-31T23:59:59.9999999+00:00","version":"1.0.0"}}
                 },
                 "Date concept example": {
                   "value": {"data":{"conceptType":"Date","pattern":"yyyy-mm-dd","conformsTo":[{"label":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"uri":"string"}],"description":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"identifier":"Concept_identifier","keywords":[{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"}],"name":{"de":"Text in Deutsch","en":"Text in English","fr":"Texte en Français","it":"Testo in Italiano","rm":"Text in Rumantsch"},"publisher":{"identifier":"test-organization"},"responsibleDeputy":{"email":"name.123@domain.com"},"responsiblePerson":{"email":"name.123@domain.com"},"themes":[{"code":"101-AAA"}],"validFrom":"2024-12-25T00:00:00+00:00","validTo":"9999-12-31T23:59:59.9999999+00:00","version":"1.0.0"}}
@@ -1741,6 +2272,7 @@
           }
         ],
         "requestBody": {
+          "description": "The import file.",
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -1748,7 +2280,6 @@
                 "properties": {
                   "file": {
                     "type": "string",
-                    "description": "The import file.",
                     "format": "binary"
                   }
                 }
@@ -2084,6 +2615,7 @@
           }
         ],
         "requestBody": {
+          "description": "The import file.",
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -2091,7 +2623,6 @@
                 "properties": {
                   "file": {
                     "type": "string",
-                    "description": "The import file.",
                     "format": "binary"
                   }
                 }
@@ -3109,26 +3640,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DcatDatasetModel"
-                  }
+                  "$ref": "#/components/schemas/DcatDatasetModelCollectionDataWrapper"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DcatDatasetModel"
-                  }
+                  "$ref": "#/components/schemas/DcatDatasetModelCollectionDataWrapper"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DcatDatasetModel"
-                  }
+                  "$ref": "#/components/schemas/DcatDatasetModelCollectionDataWrapper"
                 }
               }
             }
@@ -4133,295 +4655,6 @@
   },
   "components": {
     "schemas": {
-      "AgencyApiView": {
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "$ref": "#/components/schemas/MultiLanguage"
-          }
-        },
-        "additionalProperties": false
-      },
-      "AnnotationApiModel": {
-        "required": [
-          "type"
-        ],
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          },
-          "text": {
-            "$ref": "#/components/schemas/MultiLanguage"
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "uri": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CodeListEntryApiModel": {
-        "type": "object",
-        "properties": {
-          "annotations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AnnotationApiModel"
-            },
-            "nullable": true
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "$ref": "#/components/schemas/MultiLanguage"
-          },
-          "name": {
-            "$ref": "#/components/schemas/MultiLanguage"
-          },
-          "parentCode": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CodeListEntryValueTypeEnum": {
-        "enum": [
-          "String",
-          "Numeric"
-        ],
-        "type": "string"
-      },
-      "ConceptApiView": {
-        "type": "object",
-        "properties": {
-          "codeListEntries": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CodeListEntryApiModel"
-            },
-            "nullable": true
-          },
-          "codeListEntryValueMaxLength": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "codeListEntryValueType": {
-            "$ref": "#/components/schemas/CodeListEntryValueTypeEnum"
-          },
-          "conceptType": {
-            "$ref": "#/components/schemas/ConceptType"
-          },
-          "conformsTo": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ResourceApiView"
-            },
-            "nullable": true
-          },
-          "description": {
-            "$ref": "#/components/schemas/MultiLanguage"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          },
-          "isLocked": {
-            "type": "boolean"
-          },
-          "keywords": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MultiLanguage"
-            },
-            "nullable": true
-          },
-          "maxLength": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "maxValue": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "measurementUnit": {
-            "type": "string",
-            "nullable": true
-          },
-          "minLength": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "minValue": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "name": {
-            "$ref": "#/components/schemas/MultiLanguage"
-          },
-          "numberDecimals": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "pattern": {
-            "type": "string",
-            "nullable": true
-          },
-          "publicationLevel": {
-            "$ref": "#/components/schemas/PublicationLevel"
-          },
-          "publicationLevelProposal": {
-            "$ref": "#/components/schemas/PublicationLevel"
-          },
-          "publisher": {
-            "$ref": "#/components/schemas/AgencyApiView"
-          },
-          "registrationStatus": {
-            "$ref": "#/components/schemas/RegistrationStatus"
-          },
-          "registrationStatusProposal": {
-            "$ref": "#/components/schemas/RegistrationStatus"
-          },
-          "responsibleDeputy": {
-            "$ref": "#/components/schemas/IopPersonModel"
-          },
-          "responsiblePerson": {
-            "$ref": "#/components/schemas/IopPersonModel"
-          },
-          "themes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VocabularyEntry"
-            },
-            "nullable": true
-          },
-          "validFrom": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "validTo": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "version": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CodeInput": {
-        "required": [
-          "code"
-        ],
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "MultiLanguage": {
-        "type": "object",
-        "properties": {
-          "de": {
-            "type": "string",
-            "nullable": true
-          },
-          "en": {
-            "type": "string",
-            "nullable": true
-          },
-          "fr": {
-            "type": "string",
-            "nullable": true
-          },
-          "it": {
-            "type": "string",
-            "nullable": true
-          },
-          "rm": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ResourceApiInput": {
-        "required": [
-          "uri"
-        ],
-        "type": "object",
-        "properties": {
-          "label": {
-            "$ref": "#/components/schemas/MultiLanguage"
-          },
-          "uri": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ResourceApiView": {
-        "type": "object",
-        "properties": {
-          "label": {
-            "$ref": "#/components/schemas/MultiLanguage"
-          },
-          "uri": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "VocabularyEntry": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "$ref": "#/components/schemas/MultiLanguage"
-          },
-          "uri": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "AgentModel": {
         "type": "object",
         "properties": {
@@ -4435,6 +4668,38 @@
           },
           "name": {
             "$ref": "#/components/schemas/MultiLanguageModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnnotationModel": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "uri": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4481,6 +4746,55 @@
           }
         },
         "additionalProperties": false
+      },
+      "CodeListEntryModel": {
+        "required": [
+          "code",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "annotations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnnotationModel"
+            },
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "parentCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CodeListEntrySortProperty": {
+        "enum": [
+          "Code",
+          "Position"
+        ],
+        "type": "string"
+      },
+      "CodeListEntryValueType": {
+        "enum": [
+          "String",
+          "Numeric"
+        ],
+        "type": "string"
       },
       "ConceptType": {
         "enum": [
@@ -5218,6 +5532,264 @@
         },
         "additionalProperties": false
       },
+      "IopConceptInputModel": {
+        "required": [
+          "conceptType",
+          "description",
+          "identifier",
+          "name",
+          "publisher",
+          "responsibleDeputy",
+          "responsiblePerson",
+          "validFrom",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "codeListEntryDefaultSortProperty": {
+            "$ref": "#/components/schemas/CodeListEntrySortProperty"
+          },
+          "codeListEntryValueType": {
+            "$ref": "#/components/schemas/CodeListEntryValueType"
+          },
+          "codeListEntryValueMaxLength": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "conformsTo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "conceptType": {
+            "$ref": "#/components/schemas/ConceptType"
+          },
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultiLanguageModel"
+            },
+            "nullable": true
+          },
+          "maxLength": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "maxValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "measurementUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "minLength": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "minValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "name": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "numberDecimals": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "publisher": {
+            "$ref": "#/components/schemas/IdentifierInputModel"
+          },
+          "responsibleDeputy": {
+            "$ref": "#/components/schemas/EmailInputModel"
+          },
+          "responsiblePerson": {
+            "$ref": "#/components/schemas/EmailInputModel"
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeInputModel"
+            },
+            "nullable": true
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IopConceptModel": {
+        "required": [
+          "description",
+          "identifier",
+          "name",
+          "publisher",
+          "responsibleDeputy",
+          "responsiblePerson",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "codeListEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeListEntryModel"
+            },
+            "nullable": true
+          },
+          "codeListEntryDefaultSortProperty": {
+            "$ref": "#/components/schemas/CodeListEntrySortProperty"
+          },
+          "codeListEntryValueMaxLength": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "codeListEntryValueType": {
+            "$ref": "#/components/schemas/CodeListEntryValueType"
+          },
+          "conceptType": {
+            "$ref": "#/components/schemas/ConceptType"
+          },
+          "conformsTo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "isLocked": {
+            "type": "boolean"
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultiLanguageModel"
+            },
+            "nullable": true
+          },
+          "maxLength": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "maxValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "measurementUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "minLength": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "minValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "name": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "numberDecimals": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "publicationLevel": {
+            "$ref": "#/components/schemas/PublicationLevel"
+          },
+          "publicationLevelProposal": {
+            "$ref": "#/components/schemas/PublicationLevel"
+          },
+          "publisher": {
+            "$ref": "#/components/schemas/AgentModel"
+          },
+          "registrationStatus": {
+            "$ref": "#/components/schemas/RegistrationStatus"
+          },
+          "registrationStatusProposal": {
+            "$ref": "#/components/schemas/RegistrationStatus"
+          },
+          "responsibleDeputy": {
+            "$ref": "#/components/schemas/IopPersonModel"
+          },
+          "responsiblePerson": {
+            "$ref": "#/components/schemas/IopPersonModel"
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "IopPersonModel": {
         "required": [
           "email",
@@ -5383,8 +5955,11 @@
             ],
             "type": "object",
             "properties": {
+              "codeListEntryDefaultSortProperty": {
+                "$ref": "#/components/schemas/CodeListEntrySortProperty"
+              },
               "codeListEntryValueType": {
-                "$ref": "#/components/schemas/CodeListEntryValueTypeEnum"
+                "$ref": "#/components/schemas/CodeListEntryValueType"
               },
               "codeListEntryValueMaxLength": {
                 "type": "integer",
@@ -5411,12 +5986,12 @@
           "conformsTo": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ResourceApiInput"
+              "$ref": "#/components/schemas/ResourceModel"
             },
             "nullable": true
           },
           "description": {
-            "$ref": "#/components/schemas/MultiLanguage"
+            "$ref": "#/components/schemas/MultiLanguageModel"
           },
           "identifier": {
             "type": "string",
@@ -5425,12 +6000,12 @@
           "keywords": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/MultiLanguage"
+              "$ref": "#/components/schemas/MultiLanguageModel"
             },
             "nullable": true
           },
           "name": {
-            "$ref": "#/components/schemas/MultiLanguage"
+            "$ref": "#/components/schemas/MultiLanguageModel"
           },
           "publisher": {
             "$ref": "#/components/schemas/IdentifierInputModel"
@@ -5444,7 +6019,7 @@
           "themes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CodeInput"
+              "$ref": "#/components/schemas/CodeInputModel"
             },
             "nullable": true
           },
@@ -5548,18 +6123,6 @@
           }
         ]
       },
-      "ConceptApiViewDataWrapper": {
-        "required": [
-          "data"
-        ],
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/ConceptApiView"
-          }
-        },
-        "additionalProperties": false
-      },
       "DcatDatasetInputModelDataWrapper": {
         "required": [
           "data"
@@ -5580,6 +6143,30 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/DcatDatasetModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IopConceptInputModeDataWrapper": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/IopConceptInputModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IopConceptModelDataWrapper": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/IopConceptModel"
           }
         },
         "additionalProperties": false
@@ -5620,6 +6207,38 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PublicServiceExport"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DcatDatasetModelCollectionDataWrapper": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DcatDatasetModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IopConceptModelCollectionDataWrapper": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IopConceptModel"
             },
             "nullable": true
           }
