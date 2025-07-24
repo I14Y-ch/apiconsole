@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "I14Y Partner API",
-    "description": "Deployment info: Release-0.5.22-main.6+7-1, Assembly: 0.5.22.0",
+    "description": "Deployment info: Release-0.5.22-main.12+13-1, Assembly: 0.5.22.0",
     "version": "v1"
   },
   "servers": [
@@ -2919,6 +2919,1701 @@
         }
       }
     },
+    "/dataservices/{dataServiceId}": {
+      "get": {
+        "tags": [
+          "DataServices"
+        ],
+        "summary": "Gets the data service with the given id.",
+        "parameters": [
+          {
+            "name": "dataServiceId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataServiceModelDataWrapper"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataServiceModelDataWrapper"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataServiceModelDataWrapper"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataServices"
+        ],
+        "summary": "Updates an existing data service with the specified id.",
+        "parameters": [
+          {
+            "name": "dataServiceId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataServiceInputModelDataWrapper"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataServiceInputModelDataWrapper"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataServiceInputModelDataWrapper"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataServices"
+        ],
+        "summary": "Deletes an existing data service with the specified id.",
+        "parameters": [
+          {
+            "name": "dataServiceId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/dataservices": {
+      "get": {
+        "tags": [
+          "DataServices"
+        ],
+        "summary": "Gets the data services matching the given filters.",
+        "parameters": [
+          {
+            "name": "accessRights",
+            "in": "query",
+            "description": "Code from RightsStatement_ACCESS_RIGHTS vocabulary.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "publisherIdentifier",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "publicationLevel",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "$ref": "#/components/schemas/PublicationLevel"
+            }
+          },
+          {
+            "name": "registrationStatus",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "$ref": "#/components/schemas/RegistrationStatus"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Max number of results per page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataServiceModeCollectionDataWrapperl"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataServiceModeCollectionDataWrapperl"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataServiceModeCollectionDataWrapperl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "DataServices"
+        ],
+        "summary": "Creates a new data service.",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataServiceInputModelDataWrapper"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataServiceInputModelDataWrapper"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataServiceInputModelDataWrapper"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/dataservices/{dataServiceId}/publication-level": {
+      "put": {
+        "tags": [
+          "DataServices"
+        ],
+        "summary": "Sets the publication level of the data service with the specified id.",
+        "parameters": [
+          {
+            "name": "dataServiceId",
+            "in": "path",
+            "description": "id of the data service",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "level",
+            "in": "query",
+            "description": "selection of possible publication levels",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/PublicationLevel"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataservices/{dataServiceId}/publication-level-proposal": {
+      "put": {
+        "tags": [
+          "DataServices"
+        ],
+        "summary": "Sets the publication level proposal of the data service with the specified id.",
+        "parameters": [
+          {
+            "name": "dataServiceId",
+            "in": "path",
+            "description": "id of the data service",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "proposal",
+            "in": "query",
+            "description": "selection of possible publication level proposals",
+            "schema": {
+              "$ref": "#/components/schemas/PublicationLevel"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/dataservices/{dataServiceId}/registration-status": {
+      "put": {
+        "tags": [
+          "DataServices"
+        ],
+        "summary": "Sets the registration status of the data service with the specified id.",
+        "parameters": [
+          {
+            "name": "dataServiceId",
+            "in": "path",
+            "description": "id of the data service",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "selection of possible registration statuses",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/RegistrationStatus"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/dataservices/{dataServiceId}/registration-status-proposal": {
+      "put": {
+        "tags": [
+          "DataServices"
+        ],
+        "summary": "Sets the registration status proposal of the data service with the specified id.",
+        "parameters": [
+          {
+            "name": "dataServiceId",
+            "in": "path",
+            "description": "id of the data service",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "proposal",
+            "in": "query",
+            "description": "selection of possible registration status proposals",
+            "schema": {
+              "$ref": "#/components/schemas/RegistrationStatus"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
     "/datasets/{datasetId}": {
       "get": {
         "tags": [
@@ -4134,6 +5829,196 @@
               }
             }
           },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/structures": {
+      "delete": {
+        "tags": [
+          "Datasets"
+        ],
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
           "400": {
             "description": "Bad Request",
             "content": {
@@ -5007,13 +6892,13 @@
       "AgentModel": {
         "required": [
           "identifier",
-          "name"
+          "name",
+          "prefLabel"
         ],
         "type": "object",
         "properties": {
           "classification": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/VocabularyEntryModel"
           },
           "contactPoint": {
             "$ref": "#/components/schemas/VCardModel"
@@ -5036,6 +6921,9 @@
           "name": {
             "$ref": "#/components/schemas/MultiLanguageModel"
           },
+          "prefLabel": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
           "spatial": {
             "type": "array",
             "items": {
@@ -5046,14 +6934,14 @@
           "spatialCH": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/VocabularyEntryModel"
             },
             "nullable": true
           },
           "subAgents": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/IdModel"
+              "$ref": "#/components/schemas/IdNameModel"
             },
             "nullable": true
           },
@@ -5142,6 +7030,7 @@
       "CodeListEntryModel": {
         "required": [
           "code",
+          "conceptId",
           "name"
         ],
         "type": "object",
@@ -5156,6 +7045,10 @@
           "code": {
             "type": "string",
             "nullable": true
+          },
+          "conceptId": {
+            "type": "string",
+            "format": "uuid"
           },
           "description": {
             "$ref": "#/components/schemas/MultiLanguageModel"
@@ -5196,6 +7089,278 @@
           "String"
         ],
         "type": "string"
+      },
+      "DataServiceInputModel": {
+        "required": [
+          "accessRights",
+          "description",
+          "publisher",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "accessRights": {
+            "$ref": "#/components/schemas/CodeInputModel"
+          },
+          "conformsTo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "contactPoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VCardModel"
+            },
+            "nullable": true
+          },
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "documentation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "endpointDescriptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "endpointUrls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultiLanguageModel"
+            },
+            "nullable": true
+          },
+          "landingPages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "license": {
+            "$ref": "#/components/schemas/CodeInputModel"
+          },
+          "modified": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "previousVersion": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/IdModel"
+              },
+              {
+                "$ref": "#/components/schemas/IdNameModel"
+              }
+            ],
+            "nullable": true
+          },
+          "publisher": {
+            "$ref": "#/components/schemas/IdentifierInputModel"
+          },
+          "responsibleDeputy": {
+            "$ref": "#/components/schemas/EmailInputModel"
+          },
+          "responsiblePerson": {
+            "$ref": "#/components/schemas/EmailInputModel"
+          },
+          "servesDatasets": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/IdModel"
+                },
+                {
+                  "$ref": "#/components/schemas/IdNameModel"
+                }
+              ]
+            },
+            "nullable": true
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeInputModel"
+            },
+            "nullable": true
+          },
+          "title": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "versionNotes": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataServiceModel": {
+        "type": "object",
+        "properties": {
+          "accessRights": {
+            "$ref": "#/components/schemas/VocabularyEntryModel"
+          },
+          "conformsTo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "contactPoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VCardModel"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "documentation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "endpointDescriptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "endpointUrls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "issued": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultiLanguageModel"
+            },
+            "nullable": true
+          },
+          "landingPages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "license": {
+            "$ref": "#/components/schemas/VocabularyEntryModel"
+          },
+          "modified": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "previousVersion": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/IdModel"
+              },
+              {
+                "$ref": "#/components/schemas/IdNameModel"
+              }
+            ],
+            "nullable": true
+          },
+          "publicationLevel": {
+            "$ref": "#/components/schemas/PublicationLevel"
+          },
+          "publicationLevelProposal": {
+            "$ref": "#/components/schemas/PublicationLevel"
+          },
+          "publisher": {
+            "$ref": "#/components/schemas/AgentModel"
+          },
+          "registrationStatus": {
+            "$ref": "#/components/schemas/RegistrationStatus"
+          },
+          "registrationStatusProposal": {
+            "$ref": "#/components/schemas/RegistrationStatus"
+          },
+          "responsibleDeputy": {
+            "$ref": "#/components/schemas/IopPersonModel"
+          },
+          "responsiblePerson": {
+            "$ref": "#/components/schemas/IopPersonModel"
+          },
+          "servesDatasets": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/IdModel"
+                },
+                {
+                  "$ref": "#/components/schemas/IdNameModel"
+                }
+              ]
+            },
+            "nullable": true
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "title": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "versionNotes": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          }
+        },
+        "additionalProperties": false
       },
       "DcatDatasetInputModel": {
         "required": [
@@ -5310,7 +7475,15 @@
             "nullable": true
           },
           "previousVersion": {
-            "$ref": "#/components/schemas/IdModel"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/IdModel"
+              },
+              {
+                "$ref": "#/components/schemas/IdNameModel"
+              }
+            ],
+            "nullable": true
           },
           "processId": {
             "type": "string",
@@ -5502,7 +7675,15 @@
             "nullable": true
           },
           "previousVersion": {
-            "$ref": "#/components/schemas/IdModel"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/IdModel"
+              },
+              {
+                "$ref": "#/components/schemas/IdNameModel"
+              }
+            ],
+            "nullable": true
           },
           "processId": {
             "type": "string",
@@ -5606,7 +7787,14 @@
           "accessServices": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/IdModel"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/IdModel"
+                },
+                {
+                  "$ref": "#/components/schemas/IdNameModel"
+                }
+              ]
             },
             "nullable": true
           },
@@ -5721,7 +7909,14 @@
           "accessServices": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/IdModel"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/IdModel"
+                },
+                {
+                  "$ref": "#/components/schemas/IdNameModel"
+                }
+              ]
             },
             "nullable": true
           },
@@ -5910,6 +8105,22 @@
           }
         },
         "additionalProperties": false
+      },
+      "IdNameModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IdModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/components/schemas/MultiLanguageModel"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
       },
       "IdentifierInputModel": {
         "required": [
@@ -6291,7 +8502,7 @@
       },
       "VCardModel": {
         "required": [
-          "fn"
+          "hasEmail"
         ],
         "type": "object",
         "properties": {
@@ -6334,6 +8545,24 @@
           "uri": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataServiceInputModelDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DataServiceInputModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataServiceModelDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DataServiceModel"
           }
         },
         "additionalProperties": false
@@ -6404,6 +8633,19 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PublicServiceExport"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataServiceModeCollectionDataWrapperl": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataServiceModel"
             },
             "nullable": true
           }
