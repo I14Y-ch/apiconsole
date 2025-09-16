@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "I14Y Public API",
-    "description": "Deployment info: Release-0.5.22-main.12+13-1, Assembly: 0.5.22.0",
+    "description": "Deployment info: Release-0.5.22-main.17+18-1, Assembly: 0.5.22.0",
     "version": "v1"
   },
   "servers": [
@@ -1262,17 +1262,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/DataServiceModeCollectionDataWrapperl"
+                  "$ref": "#/components/schemas/DataServiceModelCollectionDataWrapper"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DataServiceModeCollectionDataWrapperl"
+                  "$ref": "#/components/schemas/DataServiceModelCollectionDataWrapper"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DataServiceModeCollectionDataWrapperl"
+                  "$ref": "#/components/schemas/DataServiceModelCollectionDataWrapper"
                 }
               }
             }
@@ -1843,30 +1843,332 @@
         }
       }
     },
-    "/publicservices/exports/json": {
+    "/publicservices/{publicServiceId}": {
       "get": {
         "x-auth-type": "None",
         "tags": [
           "PublicServices"
         ],
-        "summary": "Gets all Public Services.",
+        "summary": "Gets the public service with the given id.",
+        "parameters": [
+          {
+            "name": "publicServiceId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
         "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PublicServiceExportCollectionDataWrapper"
+                  "$ref": "#/components/schemas/PublicServiceModelDataWrapper"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PublicServiceExportCollectionDataWrapper"
+                  "$ref": "#/components/schemas/PublicServiceModelDataWrapper"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PublicServiceExportCollectionDataWrapper"
+                  "$ref": "#/components/schemas/PublicServiceModelDataWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/publicservices": {
+      "get": {
+        "x-auth-type": "None",
+        "tags": [
+          "PublicServices"
+        ],
+        "summary": "Gets the public services matching the given filters.",
+        "parameters": [
+          {
+            "name": "publicServiceIdentifier",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "publisherIdentifier",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "publicationLevel",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "$ref": "#/components/schemas/PublicationLevel"
+            }
+          },
+          {
+            "name": "registrationStatus",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "$ref": "#/components/schemas/RegistrationStatus"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Max number of results per page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicServiceModelCollectionDataWrapper"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicServiceModelCollectionDataWrapper"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicServiceModelCollectionDataWrapper"
                 }
               }
             }
@@ -1942,11 +2244,16 @@
       },
       "AnnotationModel": {
         "required": [
+          "codeListEntryId",
           "type"
         ],
         "type": "object",
         "properties": {
           "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "codeListEntryId": {
             "type": "string",
             "format": "uuid"
           },
@@ -1966,6 +2273,59 @@
             "nullable": true
           },
           "uri": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChannelModel": {
+        "required": [
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "fax": {
+            "type": "string",
+            "nullable": true
+          },
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "openingHours": {
+            "type": "string",
+            "nullable": true
+          },
+          "ownedBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentModel"
+            },
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/VocabularyEntryModel"
+          },
+          "url": {
             "type": "string",
             "nullable": true
           }
@@ -2781,6 +3141,158 @@
         },
         "additionalProperties": false
       },
+      "PublicServiceModel": {
+        "required": [
+          "description",
+          "identifier",
+          "name",
+          "publisher"
+        ],
+        "type": "object",
+        "properties": {
+          "businessEvents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "channels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelModel"
+            },
+            "nullable": true
+          },
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDescribedAt": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/IdModel"
+                },
+                {
+                  "$ref": "#/components/schemas/IdNameModel"
+                }
+              ]
+            },
+            "nullable": true
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultiLanguageModel"
+            },
+            "nullable": true
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "lifeEvents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "name": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "publicationLevel": {
+            "$ref": "#/components/schemas/PublicationLevel"
+          },
+          "publicationLevelProposal": {
+            "$ref": "#/components/schemas/PublicationLevel"
+          },
+          "publisher": {
+            "$ref": "#/components/schemas/AgentModel"
+          },
+          "registrationStatus": {
+            "$ref": "#/components/schemas/RegistrationStatus"
+          },
+          "registrationStatusProposal": {
+            "$ref": "#/components/schemas/RegistrationStatus"
+          },
+          "relations": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/IdModel"
+                },
+                {
+                  "$ref": "#/components/schemas/IdNameModel"
+                }
+              ]
+            },
+            "nullable": true
+          },
+          "requires": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/IdModel"
+                },
+                {
+                  "$ref": "#/components/schemas/IdNameModel"
+                }
+              ]
+            },
+            "nullable": true
+          },
+          "responsibleDeputy": {
+            "$ref": "#/components/schemas/IopPersonModel"
+          },
+          "responsiblePerson": {
+            "$ref": "#/components/schemas/IopPersonModel"
+          },
+          "sectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "spatial": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "thematicAreas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "spatialCH": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PublicationLevel": {
         "enum": [
           "Internal",
@@ -2899,20 +3411,16 @@
         },
         "additionalProperties": false
       },
-      "PublicServiceExportCollectionDataWrapper": {
+      "PublicServiceModelDataWrapper": {
         "type": "object",
         "properties": {
           "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PublicServiceExport"
-            },
-            "nullable": true
+            "$ref": "#/components/schemas/PublicServiceModel"
           }
         },
         "additionalProperties": false
       },
-      "DataServiceModeCollectionDataWrapperl": {
+      "DataServiceModelCollectionDataWrapper": {
         "type": "object",
         "properties": {
           "data": {
@@ -2951,6 +3459,19 @@
         },
         "additionalProperties": false
       },
+      "PublicServiceModelCollectionDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicServiceModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "LinkedDataFormat": {
         "enum": [
           "Ttl",
@@ -2958,255 +3479,6 @@
           "JsonLd"
         ],
         "type": "string"
-      },
-      "Channel": {
-        "type": "object",
-        "properties": {
-          "address": {
-            "$ref": "#/components/schemas/MultiLanguageModel"
-          },
-          "description": {
-            "$ref": "#/components/schemas/MultiLanguageModel"
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "fax": {
-            "type": "string",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          },
-          "mobile": {
-            "type": "string",
-            "nullable": true
-          },
-          "openingHours": {
-            "type": "string",
-            "nullable": true
-          },
-          "phone": {
-            "type": "string",
-            "nullable": true
-          },
-          "publicServiceId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "type": {
-            "$ref": "#/components/schemas/VocabularyEntryModel"
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "IsDescribedAtExport": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PublicServiceExport": {
-        "type": "object",
-        "properties": {
-          "businessEvents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VocabularyEntryModel"
-            },
-            "nullable": true
-          },
-          "channels": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Channel"
-            },
-            "nullable": true
-          },
-          "description": {
-            "$ref": "#/components/schemas/MultiLanguageModel"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          },
-          "isDescribedAt": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IsDescribedAtExport"
-            },
-            "nullable": true
-          },
-          "keywords": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MultiLanguageModel"
-            },
-            "nullable": true
-          },
-          "languages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VocabularyEntryModel"
-            },
-            "nullable": true
-          },
-          "lifeEvents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VocabularyEntryModel"
-            },
-            "nullable": true
-          },
-          "publicationLevel": {
-            "$ref": "#/components/schemas/PublicationLevel"
-          },
-          "publicationLevelProposal": {
-            "$ref": "#/components/schemas/PublicationLevel"
-          },
-          "publisher": {
-            "$ref": "#/components/schemas/PublisherExport"
-          },
-          "registrationStatus": {
-            "$ref": "#/components/schemas/RegistrationStatus"
-          },
-          "registrationStatusProposal": {
-            "$ref": "#/components/schemas/RegistrationStatus"
-          },
-          "relations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RelationExport"
-            },
-            "nullable": true
-          },
-          "requires": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RequiresExport"
-            },
-            "nullable": true
-          },
-          "sectors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VocabularyEntryModel"
-            },
-            "nullable": true
-          },
-          "spatials": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "thematicAreas": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VocabularyEntryModel"
-            },
-            "nullable": true
-          },
-          "title": {
-            "$ref": "#/components/schemas/MultiLanguageModel"
-          },
-          "spatialCH": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VocabularyEntryModel"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PublisherExport": {
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "$ref": "#/components/schemas/MultiLanguageModel"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "prefLabel": {
-            "$ref": "#/components/schemas/MultiLanguageModel"
-          },
-          "spatial": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "spatialCH": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VocabularyEntryModel"
-            },
-            "nullable": true
-          },
-          "classification": {
-            "$ref": "#/components/schemas/VocabularyEntryModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RelationExport": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "RequiresExport": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
       },
       "HttpValidationProblemDetails": {
         "allOf": [
