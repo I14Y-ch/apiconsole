@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "I14Y Public API",
-    "description": "Deployment info: Release-0.5.22-main.17+18-1, Assembly: 0.5.22.0",
+    "description": "Deployment info: Release-1.5.0+1-1, Assembly: 1.5.0.6031",
     "version": "v1"
   },
   "servers": [
@@ -47,6 +47,23 @@
               "application/rdf+xml": {
                 "schema": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/rdf+xml": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
                 }
               }
             }
@@ -106,6 +123,14 @@
             "schema": {
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "includeCodeListEntries",
+            "in": "query",
+            "description": "Valid only for concepts of the type CodeList",
+            "schema": {
+              "type": "boolean"
             }
           }
         ],
@@ -603,7 +628,7 @@
         }
       }
     },
-    "/concepts/{conceptId}/codelist-entries/exports/json": {
+    "/concepts/{conceptId}/codelist-entries/exports/{dataFormat}": {
       "get": {
         "x-auth-type": "None",
         "tags": [
@@ -620,177 +645,14 @@
               "type": "string",
               "format": "uuid"
             }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ProblemDetails"
-                    },
-                    {
-                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
-                    }
-                  ]
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ProblemDetails"
-                    },
-                    {
-                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
-                    }
-                  ]
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ProblemDetails"
-                    },
-                    {
-                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
-                    }
-                  ]
-                }
-              }
-            }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ProblemDetails"
-                    },
-                    {
-                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
-                    }
-                  ]
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ProblemDetails"
-                    },
-                    {
-                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
-                    }
-                  ]
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ProblemDetails"
-                    },
-                    {
-                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ProblemDetails"
-                    },
-                    {
-                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
-                    }
-                  ]
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ProblemDetails"
-                    },
-                    {
-                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
-                    }
-                  ]
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ProblemDetails"
-                    },
-                    {
-                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/concepts/{conceptId}/codelist-entries/exports/csv": {
-      "get": {
-        "x-auth-type": "None",
-        "tags": [
-          "Concepts"
-        ],
-        "summary": "Retrieves concept code list entries by concept id in CSV format.",
-        "parameters": [
           {
-            "name": "conceptId",
+            "name": "dataFormat",
             "in": "path",
-            "description": "The concept id (Guid)",
+            "description": "File format to export.",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/CodeListEntriesDataFormat"
             }
           }
         ],
@@ -1166,6 +1028,14 @@
             "name": "accessRights",
             "in": "query",
             "description": "Code from RightsStatement_ACCESS_RIGHTS vocabulary.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dataServiceIdentifier",
+            "in": "query",
+            "description": "",
             "schema": {
               "type": "string"
             }
@@ -1621,7 +1491,7 @@
         }
       }
     },
-    "/datasets/{datasetId}/structures/exports/{format}": {
+    "/datasets/{datasetId}/structures/exports/{dataFormat}": {
       "get": {
         "x-auth-type": "None",
         "tags": [
@@ -1640,7 +1510,7 @@
             }
           },
           {
-            "name": "format",
+            "name": "dataFormat",
             "in": "path",
             "description": "",
             "required": true,
@@ -2281,6 +2151,7 @@
       },
       "ChannelModel": {
         "required": [
+          "id",
           "identifier"
         ],
         "type": "object",
@@ -2298,6 +2169,10 @@
           "fax": {
             "type": "string",
             "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           },
           "identifier": {
             "type": "string",
@@ -2345,6 +2220,13 @@
         },
         "additionalProperties": false
       },
+      "CodeListEntriesDataFormat": {
+        "enum": [
+          "Json",
+          "Csv"
+        ],
+        "type": "string"
+      },
       "CodeListEntryModel": {
         "required": [
           "code",
@@ -2380,6 +2262,16 @@
           },
           "parentCode": {
             "type": "string",
+            "nullable": true
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "validTo": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -2453,6 +2345,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ResourceModel"
+            },
+            "nullable": true
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
             },
             "nullable": true
           },
