@@ -5,7 +5,7 @@
 ## Available Consoles
 
 ### Public Console
-**URL:** https://apiconsole.i14y.admin.ch/partner/v1/index.html
+**URL:** https://apiconsole.i14y.admin.ch/public/v1/index.html
 
 The Public Console provides read-only access to the I14Y API endpoints. It is designed for:
 - External developers and partners needing to query public data
