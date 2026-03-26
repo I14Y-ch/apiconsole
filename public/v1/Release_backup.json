@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "I14Y Public API",
-    "description": "Deployment info: Release-1.5.0+1-1, Assembly: 1.5.0.6031",
+    "description": "Deployment info: 1.10.1-build.11, Assembly: 1.10.1.0",
     "version": "v1"
   },
   "servers": [
@@ -18,35 +18,63 @@
     }
   ],
   "paths": {
-    "/catalogs/{catalogId}/dcat/exports/rdf": {
+    "/catalogs/{catalogId}/dcat/exports/{dataFormat}": {
       "get": {
         "x-auth-type": "None",
         "tags": [
           "Catalogs"
         ],
-        "summary": "Retrieves DCAT catalog by catalog id in RDF format.",
+        "summary": "Exports the catalog content in one of the standard formats.",
         "parameters": [
           {
             "name": "catalogId",
             "in": "path",
-            "description": "The catalog id (Guid)",
+            "description": "",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "dataFormat",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/CatalogExportFormat"
+            }
           }
         ],
         "responses": {
-          "500": {
-            "description": "Internal Server Error"
-          },
           "200": {
-            "description": "OK",
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
             "content": {
               "application/rdf+xml": {
                 "schema": {
-                  "type": "string"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/x-turtle": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
                 }
               }
             }
@@ -65,24 +93,39 @@
                     }
                   ]
                 }
+              },
+              "application/x-turtle": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
-    "/catalogs/{catalogId}/dcat/exports/ttl": {
+    "/catalogs/{catalogId}": {
       "get": {
         "x-auth-type": "None",
         "tags": [
           "Catalogs"
         ],
-        "summary": "Retrieves DCAT catalog by catalog id in TTL format.",
+        "summary": "Gets the catalog with the given id.",
         "parameters": [
           {
             "name": "catalogId",
             "in": "path",
-            "description": "The catalog id (Guid)",
+            "description": "",
             "required": true,
             "schema": {
               "type": "string",
@@ -91,15 +134,569 @@
           }
         ],
         "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error"
           },
           "200": {
             "description": "OK",
             "content": {
-              "application/x-turtle": {
+              "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/DcatCatalogModelDataWrapper"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogModelDataWrapper"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogModelDataWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalogs": {
+      "get": {
+        "x-auth-type": "None",
+        "tags": [
+          "Catalogs"
+        ],
+        "summary": "Gets a list of catalogs.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogModelCollectionDataWrapper"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogModelCollectionDataWrapper"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogModelCollectionDataWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalogs/{catalogId}/records": {
+      "get": {
+        "x-auth-type": "None",
+        "tags": [
+          "Catalogs"
+        ],
+        "summary": "Gets all the records from a specific catalog.",
+        "parameters": [
+          {
+            "name": "catalogId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogRecordModelCollectionDataWrapper"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogRecordModelCollectionDataWrapper"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogRecordModelCollectionDataWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalogs/{catalogId}/records/{recordId}": {
+      "get": {
+        "x-auth-type": "None",
+        "tags": [
+          "Catalogs"
+        ],
+        "summary": "Gets a specific catalog record.",
+        "parameters": [
+          {
+            "name": "catalogId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogRecordModelDataWrapper"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogRecordModelDataWrapper"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DcatCatalogRecordModelDataWrapper"
                 }
               }
             }
@@ -376,9 +973,9 @@
             "description": "Page number.",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
+              "format": "int32"
+            },
+            "example": 1
           },
           {
             "name": "pageSize",
@@ -386,9 +983,9 @@
             "description": "Max number of results per page.",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 25
-            }
+              "format": "int32"
+            },
+            "example": 25
           }
         ],
         "responses": {
@@ -809,6 +1406,432 @@
         }
       }
     },
+    "/concepts/{conceptId}/codelist-entries/search": {
+      "get": {
+        "x-auth-type": "None",
+        "tags": [
+          "Concepts"
+        ],
+        "summary": "Returns the results of the search in code list entries of a specific concept.",
+        "parameters": [
+          {
+            "name": "conceptId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Language"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The search query. The search is performed in the selected language only. \r\n\r\nYou can use * to represent any number of characters and ? to represent a single character.\r\nExamples:\r\n- Agricultur*\r\n- Agricultur?",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeListEntryModelCollectionDataWrapper"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeListEntryModelCollectionDataWrapper"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeListEntryModelCollectionDataWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/concepts/{conceptId}/codelist-entries/search/exports/{dataFormat}": {
+      "get": {
+        "x-auth-type": "None",
+        "tags": [
+          "Concepts"
+        ],
+        "summary": "Exports the results of the search in code list entries of a specific concept.",
+        "parameters": [
+          {
+            "name": "conceptId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Language"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The search query. The search is performed in the selected language only. \r\n\r\nYou can use * to represent any number of characters and ? to represent a single character.\r\nExamples:\r\n- Agricultur*\r\n- Agricultur?",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "dataFormat",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/CodeListEntriesDataFormat"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/dataservices/{dataServiceId}": {
       "get": {
         "x-auth-type": "None",
@@ -1070,9 +2093,9 @@
             "description": "Page number.",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
+              "format": "int32"
+            },
+            "example": 1
           },
           {
             "name": "pageSize",
@@ -1080,9 +2103,9 @@
             "description": "Max number of results per page.",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 25
-            }
+              "format": "int32"
+            },
+            "example": 25
           }
         ],
         "responses": {
@@ -1411,9 +2434,9 @@
             "description": "Page number.",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
+              "format": "int32"
+            },
+            "example": 1
           },
           {
             "name": "pageSize",
@@ -1421,9 +2444,9 @@
             "description": "Max number of results per page.",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 25
-            }
+              "format": "int32"
+            },
+            "example": 25
           }
         ],
         "responses": {
@@ -1497,7 +2520,7 @@
         "tags": [
           "Datasets"
         ],
-        "summary": "",
+        "summary": "Exports the dataset structure in a file format.",
         "parameters": [
           {
             "name": "datasetId",
@@ -1966,9 +2989,9 @@
             "description": "Page number.",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
+              "format": "int32"
+            },
+            "example": 1
           },
           {
             "name": "pageSize",
@@ -1976,9 +2999,9 @@
             "description": "Max number of results per page.",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 25
-            }
+              "format": "int32"
+            },
+            "example": 25
           }
         ],
         "responses": {
@@ -2148,6 +3171,13 @@
           }
         },
         "additionalProperties": false
+      },
+      "CatalogExportFormat": {
+        "enum": [
+          "RDF",
+          "TTL"
+        ],
+        "type": "string"
       },
       "ChannelModel": {
         "required": [
@@ -2320,10 +3350,6 @@
             },
             "nullable": true
           },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "description": {
             "$ref": "#/components/schemas/MultiLanguageModel"
           },
@@ -2348,6 +3374,10 @@
             },
             "nullable": true
           },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
           "identifiers": {
             "type": "array",
             "items": {
@@ -2363,7 +3393,7 @@
           "keywords": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/MultiLanguageModel"
+              "$ref": "#/components/schemas/KeywordModel"
             },
             "nullable": true
           },
@@ -2447,6 +3477,109 @@
           }
         },
         "additionalProperties": false
+      },
+      "DcatCatalogModel": {
+        "required": [
+          "description",
+          "publisher",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "publisher": {
+            "$ref": "#/components/schemas/AgentModel"
+          },
+          "themeTaxonomy": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DcatCatalogRecordModel": {
+        "required": [
+          "primaryTopic"
+        ],
+        "type": "object",
+        "properties": {
+          "dcatCatalogId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "primaryTopic": {
+            "$ref": "#/components/schemas/DcatCatalogResourceModel"
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DcatCatalogThemeModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DcatCatalogResourceModel": {
+        "type": "object",
+        "properties": {
+          "resourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceType": {
+            "$ref": "#/components/schemas/DcatCatalogType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DcatCatalogThemeModel": {
+        "required": [
+          "code",
+          "themeTaxonomy"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "themeTaxonomy": {
+            "type": "string",
+            "nullable": true
+          },
+          "uri": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DcatCatalogType": {
+        "enum": [
+          "Dataset",
+          "DataService"
+        ],
+        "type": "string"
       },
       "DcatDatasetModel": {
         "type": "object",
@@ -2535,7 +3668,7 @@
           "keywords": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/MultiLanguageModel"
+              "$ref": "#/components/schemas/KeywordModel"
             },
             "nullable": true
           },
@@ -2891,7 +4024,7 @@
           "keywords": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/MultiLanguageModel"
+              "$ref": "#/components/schemas/KeywordModel"
             },
             "nullable": true
           },
@@ -2998,6 +4131,37 @@
         },
         "additionalProperties": false
       },
+      "KeywordModel": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "uri": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Language": {
+        "enum": [
+          "De",
+          "En",
+          "Fr",
+          "It",
+          "Rm"
+        ],
+        "type": "string"
+      },
+      "LinkedDataFormat": {
+        "enum": [
+          "Ttl",
+          "Rdf",
+          "JsonLd"
+        ],
+        "type": "string"
+      },
       "MultiLanguageModel": {
         "type": "object",
         "properties": {
@@ -3091,7 +4255,7 @@
           "keywords": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/MultiLanguageModel"
+              "$ref": "#/components/schemas/KeywordModel"
             },
             "nullable": true
           },
@@ -3292,6 +4456,24 @@
         },
         "additionalProperties": false
       },
+      "DcatCatalogModelDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DcatCatalogModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DcatCatalogRecordModelDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DcatCatalogRecordModel"
+          }
+        },
+        "additionalProperties": false
+      },
       "DcatDatasetModelDataWrapper": {
         "type": "object",
         "properties": {
@@ -3315,6 +4497,45 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/PublicServiceModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DcatCatalogModelCollectionDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DcatCatalogModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DcatCatalogRecordModelCollectionDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DcatCatalogRecordModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CodeListEntryModelCollectionDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeListEntryModel"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3371,14 +4592,6 @@
         },
         "additionalProperties": false
       },
-      "LinkedDataFormat": {
-        "enum": [
-          "Ttl",
-          "Rdf",
-          "JsonLd"
-        ],
-        "type": "string"
-      },
       "HttpValidationProblemDetails": {
         "allOf": [
           {
@@ -3398,7 +4611,7 @@
                 "nullable": true
               }
             },
-            "additionalProperties": { }
+            "additionalProperties": {}
           }
         ]
       },
@@ -3427,7 +4640,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": { }
+        "additionalProperties": {}
       }
     },
     "securitySchemes": {
@@ -3441,7 +4654,7 @@
   },
   "security": [
     {
-      "Bearer": [ ]
+      "Bearer": []
     }
   ]
 }
