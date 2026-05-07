@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "I14Y Public API",
-    "description": "Deployment info: 1.13.8-build.29, Assembly: 1.13.8.0",
+    "description": "Deployment info: 1.13.16-build.37, Assembly: 1.13.16.0",
     "version": "v1"
   },
   "servers": [
@@ -1250,6 +1250,15 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/CodeListEntriesDataFormat"
+            }
+          },
+          {
+            "name": "withAnnotations",
+            "in": "query",
+            "description": "Bool flag for annotations.",
+            "schema": {
+              "type": "boolean",
+              "default": true
             }
           }
         ],
@@ -2976,6 +2985,14 @@
             }
           },
           {
+            "name": "codeSystemUri",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "publicationLevel",
             "in": "query",
             "description": "",
@@ -3599,6 +3616,256 @@
           }
         }
       }
+    },
+    "/search": {
+      "get": {
+        "x-auth-type": "None",
+        "tags": [
+          "Search"
+        ],
+        "summary": "Returns the search results for the given filters.",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language to use for the search.",
+            "schema": {
+              "$ref": "#/components/schemas/Language"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Search query.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "accessRights",
+            "in": "query",
+            "description": "Access rights to search.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "businessEvents",
+            "in": "query",
+            "description": "Business events to search.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "conceptValueTypes",
+            "in": "query",
+            "description": "Concept types to search (example: Numeric). Only applicable for concepts.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ConceptType"
+              }
+            }
+          },
+          {
+            "name": "formats",
+            "in": "query",
+            "description": "Formats to search. Only applicatble datasets with distributions containing the specified formats.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "publicationLevels",
+            "in": "query",
+            "description": "Publication levels to search.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/PublicationLevel"
+              }
+            }
+          },
+          {
+            "name": "publicationLevelProposals",
+            "in": "query",
+            "description": "Publication level proposals to search.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/PublicationLevel"
+              }
+            }
+          },
+          {
+            "name": "lifeEvents",
+            "in": "query",
+            "description": "Life events to search. Only applicable to public services.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "publishers",
+            "in": "query",
+            "description": "Publisher identifiers to search.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "registrationStatuses",
+            "in": "query",
+            "description": "Registration status to search.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/RegistrationStatus"
+              }
+            }
+          },
+          {
+            "name": "registrationStatusProposals",
+            "in": "query",
+            "description": "Registration status proposals to search.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/RegistrationStatus"
+              }
+            }
+          },
+          {
+            "name": "structure",
+            "in": "query",
+            "description": "Structure value to search. Only applicable to datasets.",
+            "schema": {
+              "$ref": "#/components/schemas/SearchStructureOption"
+            }
+          },
+          {
+            "name": "themes",
+            "in": "query",
+            "description": "Themes to search.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "description": "Catalog types to search (example: Dataset).",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SearchResourceType"
+              }
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Max number of results per page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultModelCollectionDataWrapper"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultModelCollectionDataWrapper"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultModelCollectionDataWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3607,7 +3874,8 @@
         "required": [
           "identifier",
           "name",
-          "prefLabel"
+          "prefLabel",
+          "system"
         ],
         "type": "object",
         "properties": {
@@ -3637,6 +3905,9 @@
           },
           "prefLabel": {
             "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "system": {
+            "$ref": "#/components/schemas/SystemInfoModel"
           },
           "spatial": {
             "type": "array",
@@ -3707,6 +3978,16 @@
         "enum": [
           "RDF",
           "TTL"
+        ],
+        "type": "string"
+      },
+      "SearchResourceType": {
+        "enum": [
+          "Dataset",
+          "DataService",
+          "PublicService",
+          "Concept",
+          "MappingTable"
         ],
         "type": "string"
       },
@@ -3861,7 +4142,17 @@
         ],
         "type": "string"
       },
+      "CreationType": {
+        "enum": [
+          "Manual",
+          "Automated"
+        ],
+        "type": "string"
+      },
       "DataServiceModel": {
+        "required": [
+          "system"
+        ],
         "type": "object",
         "properties": {
           "accessRights": {
@@ -3989,6 +4280,9 @@
             },
             "nullable": true
           },
+          "system": {
+            "$ref": "#/components/schemas/SystemInfoModel"
+          },
           "themes": {
             "type": "array",
             "items": {
@@ -4013,6 +4307,7 @@
         "required": [
           "description",
           "publisher",
+          "system",
           "title"
         ],
         "type": "object",
@@ -4024,11 +4319,11 @@
             "type": "string",
             "format": "uuid"
           },
-          "title": {
-            "$ref": "#/components/schemas/MultiLanguageModel"
-          },
           "publisher": {
             "$ref": "#/components/schemas/AgentModel"
+          },
+          "system": {
+            "$ref": "#/components/schemas/SystemInfoModel"
           },
           "themeTaxonomy": {
             "type": "array",
@@ -4036,6 +4331,9 @@
               "type": "string"
             },
             "nullable": true
+          },
+          "title": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
           }
         },
         "additionalProperties": false
@@ -4113,6 +4411,9 @@
         "type": "string"
       },
       "DcatDatasetModel": {
+        "required": [
+          "system"
+        ],
         "type": "object",
         "properties": {
           "accessRights": {
@@ -4289,6 +4590,9 @@
           },
           "retentionPeriodComplement": {
             "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "system": {
+            "$ref": "#/components/schemas/SystemInfoModel"
           },
           "spatial": {
             "type": "array",
@@ -4501,11 +4805,11 @@
       "IopConceptModel": {
         "required": [
           "description",
-          "identifier",
           "name",
           "publisher",
           "responsibleDeputy",
           "responsiblePerson",
+          "system",
           "version"
         ],
         "type": "object",
@@ -4547,6 +4851,14 @@
           },
           "identifier": {
             "type": "string",
+            "nullable": true,
+            "deprecated": true
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           },
           "isLocked": {
@@ -4616,6 +4928,9 @@
           "responsiblePerson": {
             "$ref": "#/components/schemas/IopPersonModel"
           },
+          "system": {
+            "$ref": "#/components/schemas/SystemInfoModel"
+          },
           "themes": {
             "type": "array",
             "items": {
@@ -4677,11 +4992,11 @@
       },
       "Language": {
         "enum": [
-          "De",
-          "En",
-          "Fr",
-          "It",
-          "Rm"
+          "de",
+          "en",
+          "fr",
+          "it",
+          "rm"
         ],
         "type": "string"
       },
@@ -4708,6 +5023,7 @@
           "responsibleDeputy",
           "responsiblePerson",
           "source",
+          "system",
           "target",
           "version"
         ],
@@ -4764,6 +5080,9 @@
           },
           "responsiblePerson": {
             "$ref": "#/components/schemas/IopPersonModel"
+          },
+          "system": {
+            "$ref": "#/components/schemas/SystemInfoModel"
           },
           "source": {
             "$ref": "#/components/schemas/MappingTableUriModel"
@@ -4856,9 +5175,9 @@
       "PublicServiceModel": {
         "required": [
           "description",
-          "identifier",
           "name",
-          "publisher"
+          "publisher",
+          "system"
         ],
         "type": "object",
         "properties": {
@@ -4885,6 +5204,14 @@
           },
           "identifier": {
             "type": "string",
+            "nullable": true,
+            "deprecated": true
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           },
           "isDescribedAt": {
@@ -4981,6 +5308,9 @@
             },
             "nullable": true
           },
+          "system": {
+            "$ref": "#/components/schemas/SystemInfoModel"
+          },
           "spatial": {
             "type": "array",
             "items": {
@@ -5036,6 +5366,127 @@
           },
           "uri": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchStructureOption": {
+        "enum": [
+          "WithStructure",
+          "WithoutStructure"
+        ],
+        "type": "string"
+      },
+      "SearchResultModel": {
+        "required": [
+          "description",
+          "identifier",
+          "publisher",
+          "title",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "accessRights": {
+            "$ref": "#/components/schemas/VocabularyEntryModel"
+          },
+          "businessEvents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "conceptType": {
+            "$ref": "#/components/schemas/ConceptType"
+          },
+          "description": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "formats": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "lifeEvents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "publicationLevel": {
+            "$ref": "#/components/schemas/PublicationLevel"
+          },
+          "publicationLevelProposal": {
+            "$ref": "#/components/schemas/PublicationLevel"
+          },
+          "publisher": {
+            "$ref": "#/components/schemas/AgentModel"
+          },
+          "registrationStatus": {
+            "$ref": "#/components/schemas/RegistrationStatus"
+          },
+          "registrationStatusProposal": {
+            "$ref": "#/components/schemas/RegistrationStatus"
+          },
+          "structure": {
+            "$ref": "#/components/schemas/SearchStructureOption"
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VocabularyEntryModel"
+            },
+            "nullable": true
+          },
+          "title": {
+            "$ref": "#/components/schemas/MultiLanguageModel"
+          },
+          "type": {
+            "$ref": "#/components/schemas/SearchResourceType"
+          },
+          "validTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemInfoModel": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "creationType": {
+            "$ref": "#/components/schemas/CreationType"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -5179,6 +5630,19 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DcatCatalogRecordModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchResultModelCollectionDataWrapper": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchResultModel"
             },
             "nullable": true
           }
