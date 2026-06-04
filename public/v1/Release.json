@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "I14Y Public API",
-    "description": "Deployment info: 1.13.16-build.37, Assembly: 1.13.16.0",
+    "description": "Deployment info: 1.14.2-build.40, Assembly: 1.14.2.0",
     "version": "v1"
   },
   "servers": [
@@ -3981,16 +3981,6 @@
         ],
         "type": "string"
       },
-      "SearchResourceType": {
-        "enum": [
-          "Dataset",
-          "DataService",
-          "PublicService",
-          "Concept",
-          "MappingTable"
-        ],
-        "type": "string"
-      },
       "ChannelModel": {
         "required": [
           "id",
@@ -5371,10 +5361,13 @@
         },
         "additionalProperties": false
       },
-      "SearchStructureOption": {
+      "SearchResourceType": {
         "enum": [
-          "WithStructure",
-          "WithoutStructure"
+          "Dataset",
+          "DataService",
+          "PublicService",
+          "Concept",
+          "MappingTable"
         ],
         "type": "string"
       },
@@ -5444,6 +5437,9 @@
           "structure": {
             "$ref": "#/components/schemas/SearchStructureOption"
           },
+          "system": {
+            "$ref": "#/components/schemas/SystemInfoModel"
+          },
           "themes": {
             "type": "array",
             "items": {
@@ -5473,6 +5469,13 @@
           }
         },
         "additionalProperties": false
+      },
+      "SearchStructureOption": {
+        "enum": [
+          "WithStructure",
+          "WithoutStructure"
+        ],
+        "type": "string"
       },
       "SystemInfoModel": {
         "type": "object",
