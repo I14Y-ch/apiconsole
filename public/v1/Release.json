@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.4",
+  "openapi": "3.0.3",
   "info": {
     "title": "I14Y Public API",
     "description": "Deployment info: 1.15.4-build.45, Assembly: 1.15.4.0",
